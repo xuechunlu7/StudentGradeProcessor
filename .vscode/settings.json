@@ -1,0 +1,9 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/Users/xuechunlu/Downloads/junit-jupiter-api-5.10.0.jar"
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.debug.settings.onBuildFailureProceed": true,
+    "maven.view": "hierarchical"
+}
