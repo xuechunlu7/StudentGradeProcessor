@@ -1,0 +1,173 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > OutputFileWriter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">writer</a>
+</div>
+
+<h1>Coverage Summary for Class: OutputFileWriter (writer)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">OutputFileWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.7%
+  </span>
+  <span class="absValue">
+    (18/19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package writer;
+&nbsp;
+&nbsp;import model.ProcessedResult;
+&nbsp;import exception.DataValidationException;
+&nbsp;
+&nbsp;import java.io.BufferedWriter;
+&nbsp;import java.io.FileOutputStream;
+&nbsp;import java.io.OutputStreamWriter;
+&nbsp;import java.io.IOException;
+&nbsp;import java.nio.charset.StandardCharsets;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public class OutputFileWriter {
+&nbsp;    private String outputFilePath;
+&nbsp;    
+<b class="fc">&nbsp;    public OutputFileWriter(String outputFilePath) {</b>
+<b class="fc">&nbsp;        if (outputFilePath == null || outputFilePath.trim().isEmpty()) {</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;Output file path cannot be empty&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        this.outputFilePath = outputFilePath;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    public void writeOutput(List&lt;ProcessedResult&gt; results) 
+&nbsp;            throws DataValidationException, IOException {
+&nbsp;        
+&nbsp;        // Defensive programming: check results
+<b class="fc">&nbsp;        if (results == null || results.isEmpty()) {</b>
+<b class="fc">&nbsp;            throw new DataValidationException(&quot;No results to output&quot;);</b>
+&nbsp;        }
+&nbsp;        
+<b class="fc">&nbsp;        try (BufferedWriter writer = new BufferedWriter(</b>
+&nbsp;                new OutputStreamWriter(new FileOutputStream(outputFilePath), StandardCharsets.UTF_8))) {
+&nbsp;            
+&nbsp;            // Write header
+<b class="fc">&nbsp;            writer.write(&quot;Student ID,Student Name,Course Code,Final grade (test 1,2,3-3x20%, final exam 40%)&quot;);</b>
+<b class="fc">&nbsp;            writer.newLine();</b>
+&nbsp;            
+&nbsp;            // Write data rows
+<b class="fc">&nbsp;            for (ProcessedResult result : results) {</b>
+<b class="fc">&nbsp;                String line = String.format(&quot;%s,%s,%s,%.1f&quot;,</b>
+<b class="fc">&nbsp;                    result.getStudentId(),</b>
+<b class="fc">&nbsp;                    result.getStudentName(),</b>
+<b class="fc">&nbsp;                    result.getCourseCode(),</b>
+<b class="fc">&nbsp;                    result.getFinalGrade()</b>
+&nbsp;                );
+&nbsp;                
+<b class="fc">&nbsp;                writer.write(line);</b>
+<b class="fc">&nbsp;                writer.newLine();</b>
+&nbsp;            }
+&nbsp;            
+<b class="fc">&nbsp;            System.out.println(&quot;Output file written successfully: &quot; + outputFilePath);</b>
+&nbsp;            
+&nbsp;        } catch (IOException e) {
+<b class="nc">&nbsp;            throw new IOException(&quot;Cannot write output file: &quot; + outputFilePath, e);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2026-03-17 14:50</div>
+</div>
+</body>
+</html>

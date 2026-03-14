@@ -23,6 +23,11 @@ public class CourseFileReader extends FileReader<GradeRecord> {
     
     @Override
     protected GradeRecord parseLine(String line, int lineNumber) throws DataValidationException {
+        // Explicitly check for a comma
+        if (!line.contains(",")) {
+            throw new DataValidationException("Line " + lineNumber + " format error: missing comma delimiter");
+        }
+
         String[] parts = line.split(",");
         
         // Defensive programming: check column count
@@ -39,7 +44,7 @@ public class CourseFileReader extends FileReader<GradeRecord> {
             double test3 = Double.parseDouble(parts[4].trim());
             double finalExam = Double.parseDouble(parts[5].trim());
             
-            // Validate grade ranges (reject negative and out-of-range values)
+            // Defensive Programming: Validate grade ranges (reject negative and out-of-range values)
             for (double g : new double[]{test1, test2, test3, finalExam}) {
                 if (g < 0) {
                     throw new DataValidationException("Line " + lineNumber + " grade value negative: " + g);

@@ -32,10 +32,20 @@ public class DataProcessor {
         }
         
         this.gradeRecords = records;
+        Set<String> processedKeys = new HashSet<>();
         
         // Associate students with grades
         for (GradeRecord record : records) {
             String studentId = record.getStudentId();
+            String courseCode = record.getCourseCode();
+            String uniqueKey = studentId + "-" + courseCode;
+            
+            // Deduplicate: prevent multiple records for the same student in the same course
+            if (processedKeys.contains(uniqueKey)) {
+                System.err.println("Warning: Duplicate record found for student " + studentId + " in course " + courseCode + ". Skipping.");
+                continue;
+            }
+            
             Student student = studentMap.get(studentId);
             
             if (student == null) {
@@ -53,6 +63,7 @@ public class DataProcessor {
             );
             
             processedResults.add(result);
+            processedKeys.add(uniqueKey);
         }
         
         // Sort by student ID using Collections.sort

@@ -12,6 +12,11 @@ public class NameFileReader extends FileReader<Student> {
     
     @Override
     protected Student parseLine(String line, int lineNumber) throws DataValidationException {
+        // Explicitly check for a comma
+        if (!line.contains(",")) {
+            throw new DataValidationException("Line " + lineNumber + " format error: missing comma delimiter");
+        }
+
         // Split by comma
         String[] parts = line.split(",");
         
@@ -26,6 +31,11 @@ public class NameFileReader extends FileReader<Student> {
         // Defensive programming: validate ID format
         if (!studentId.matches("\\d{9}")) {
             throw new DataValidationException("Line " + lineNumber + " student ID format error: " + studentId);
+        }
+        
+        // Defensive programming: validate student name
+        if (studentName.isEmpty()) {
+            throw new DataValidationException("Line " + lineNumber + " student name cannot be empty");
         }
         
         return new Student(studentId, studentName);

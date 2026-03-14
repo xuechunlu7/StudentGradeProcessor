@@ -1,0 +1,188 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GradeRecord</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">model</a>
+</div>
+
+<h1>Coverage Summary for Class: GradeRecord (model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GradeRecord</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.9%
+  </span>
+  <span class="absValue">
+    (10/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96.4%
+  </span>
+  <span class="absValue">
+    (27/28)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package model;
+&nbsp;
+&nbsp;public class GradeRecord extends Course {
+&nbsp;    private String studentId;
+&nbsp;    private double test1;
+&nbsp;    private double test2;
+&nbsp;    private double test3;
+&nbsp;    private double finalExam;
+&nbsp;    private double calculatedFinalGrade;
+&nbsp;    
+&nbsp;    public GradeRecord(String studentId, String courseCode, 
+&nbsp;                       double test1, double test2, double test3, double finalExam) {
+<b class="fc">&nbsp;        super(courseCode);</b>
+&nbsp;        
+&nbsp;        // Defensive programming: validate all inputs
+<b class="fc">&nbsp;        if (studentId == null || studentId.trim().isEmpty()) {</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;Student ID cannot be empty&quot;);</b>
+&nbsp;        }
+&nbsp;        
+&nbsp;        // Validate grade ranges (0-100)
+<b class="fc">&nbsp;        validateGrade(test1, &quot;Test 1&quot;);</b>
+<b class="fc">&nbsp;        validateGrade(test2, &quot;Test 2&quot;);</b>
+<b class="fc">&nbsp;        validateGrade(test3, &quot;Test 3&quot;);</b>
+<b class="fc">&nbsp;        validateGrade(finalExam, &quot;Final Exam&quot;);</b>
+&nbsp;        
+<b class="fc">&nbsp;        this.studentId = studentId.trim();</b>
+<b class="fc">&nbsp;        this.test1 = test1;</b>
+<b class="fc">&nbsp;        this.test2 = test2;</b>
+<b class="fc">&nbsp;        this.test3 = test3;</b>
+<b class="fc">&nbsp;        this.finalExam = finalExam;</b>
+&nbsp;        
+&nbsp;        // Calculate final grade
+<b class="fc">&nbsp;        this.calculatedFinalGrade = calculateFinalGrade(test1, test2, test3, finalExam);</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    // Defensive programming: grade validation method
+&nbsp;    private void validateGrade(double grade, String gradeName) {
+<b class="fc">&nbsp;        if (grade &lt; 0 || grade &gt; 100) {</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(gradeName + &quot; grade must be between 0-100: &quot; + grade);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public String getCourseType() {
+<b class="nc">&nbsp;        return &quot;Regular Course&quot;;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public double calculateFinalGrade(double test1, double test2, double test3, double finalExam) {
+&nbsp;        // Calculation: each test 20%, final exam 40%
+<b class="fc">&nbsp;        double weightedTests = (test1 + test2 + test3) * 0.2;</b>
+<b class="fc">&nbsp;        double weightedFinal = finalExam * 0.4;</b>
+<b class="fc">&nbsp;        double finalGrade = weightedTests + weightedFinal;</b>
+&nbsp;        
+&nbsp;        // Keep one decimal place
+<b class="fc">&nbsp;        return Math.round(finalGrade * 10) / 10.0;</b>
+&nbsp;    }
+&nbsp;    
+&nbsp;    // Getter methods
+<b class="fc">&nbsp;    public String getStudentId() { return studentId; }</b>
+<b class="fc">&nbsp;    public double getTest1() { return test1; }</b>
+<b class="fc">&nbsp;    public double getTest2() { return test2; }</b>
+<b class="fc">&nbsp;    public double getTest3() { return test3; }</b>
+<b class="fc">&nbsp;    public double getFinalExam() { return finalExam; }</b>
+<b class="fc">&nbsp;    public double getCalculatedFinalGrade() { return calculatedFinalGrade; }</b>
+&nbsp;    
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="fc">&nbsp;        return String.format(&quot;%s,%s,%.1f,%.1f,%.1f,%.1f,%.1f&quot;, </b>
+<b class="fc">&nbsp;            studentId, courseCode, test1, test2, test3, finalExam, calculatedFinalGrade);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2026-03-17 14:50</div>
+</div>
+</body>
+</html>

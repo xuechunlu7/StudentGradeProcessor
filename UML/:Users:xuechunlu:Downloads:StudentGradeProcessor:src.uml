@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>/Users/xuechunlu/Downloads/StudentGradeProcessor/src</OriginalElement>
+  <nodes>
+    <node x="-957.0" y="1603.0">model.GradeRecord</node>
+    <node x="-1251.5" y="886.5">processor.DataProcessor</node>
+    <node x="-608.0" y="1369.5">model.Student</node>
+    <node x="-1252.5" y="1312.0">model.ProcessedResult</node>
+    <node x="-55.79212253829314" y="1135.0">writer.OutputFileWriter</node>
+    <node x="-482.0" y="1729.5">reader.FileReader</node>
+    <node x="-772.0" y="1113.0">reader.CourseFileReader</node>
+    <node x="-957.0" y="2101.0">model.Course</node>
+    <node x="-522.0" y="944.5">reader.NameFileReader</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="reader.CourseFileReader" target="model.GradeRecord" relationship="CREATE">
+      <point x="-73.0" y="50.0" />
+      <point x="-699.0" y="1243.0" />
+      <point x="-640.5" y="1243.0" />
+      <point x="105.5" y="-200.0" />
+    </edge>
+    <edge source="reader.CourseFileReader" target="reader.FileReader" relationship="GENERALIZATION">
+      <point x="73.0" y="50.0" />
+      <point x="-553.0" y="1243.0" />
+      <point x="-386.0" y="1243.0" />
+      <point x="0.0" y="-73.5" />
+    </edge>
+    <edge source="processor.DataProcessor" target="model.GradeRecord" relationship="TO_MANY">
+      <point x="122.75" y="96.5" />
+      <point x="-883.25" y="1103.0" />
+      <point x="-886.0" y="1103.0" />
+      <point x="-886.0" y="1283.0" />
+      <point x="-851.5" y="1283.0" />
+      <point x="-105.5" y="-200.0" />
+    </edge>
+    <edge source="processor.DataProcessor" target="model.ProcessedResult" relationship="TO_MANY">
+      <point x="122.75" y="96.5" />
+      <point x="-883.25" y="1103.0" />
+      <point x="-886.0" y="1103.0" />
+      <point x="-886.0" y="1283.0" />
+      <point x="-1062.75" y="1283.0" />
+      <point x="63.25" y="-131.0" />
+    </edge>
+    <edge source="processor.DataProcessor" target="model.Student" relationship="TO_MANY">
+      <point x="122.75" y="96.5" />
+      <point x="-883.25" y="1103.0" />
+      <point x="-886.0" y="1103.0" />
+      <point x="-886.0" y="1283.0" />
+      <point x="-557.0" y="1283.0" />
+      <point x="-51.0" y="-73.5" />
+    </edge>
+    <edge source="processor.DataProcessor" target="model.ProcessedResult" relationship="CREATE">
+      <point x="-122.75" y="96.5" />
+      <point x="-1128.75" y="1103.0" />
+      <point x="-1189.25" y="1103.0" />
+      <point x="-63.25" y="-131.0" />
+    </edge>
+    <edge source="model.GradeRecord" target="model.Course" relationship="GENERALIZATION">
+      <point x="0.0" y="200.0" />
+      <point x="0.0" y="-62.0" />
+    </edge>
+    <edge source="reader.NameFileReader" target="model.Student" relationship="CREATE">
+      <point x="-58.0" y="38.5" />
+      <point x="-464.0" y="1343.0" />
+      <point x="-455.0" y="1343.0" />
+      <point x="51.0" y="-73.5" />
+    </edge>
+    <edge source="reader.NameFileReader" target="reader.FileReader" relationship="GENERALIZATION">
+      <point x="58.0" y="38.5" />
+      <point x="-348.0" y="1243.0" />
+      <point x="-386.0" y="1243.0" />
+      <point x="0.0" y="-73.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.6725533480500367" showDependencies="true" x="-761.5" y="1565.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>Project Files</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
