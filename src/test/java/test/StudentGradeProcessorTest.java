@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class StudentGradeProcessorTest {
 
-    @Test 
+    @Test
     public void testStudentValidation() {
         // Test valid student creation
         assertDoesNotThrow(() -> new Student("123456789", "John Doe"));
@@ -49,7 +49,7 @@ public class StudentGradeProcessorTest {
 
         List<GradeRecord> records = new ArrayList<>();
         // Constructor inferred from CourseFileReader: ID, Course, T1, T2, T3, Final
-        records.add(new GradeRecord("100000001", "CSC101", 80, 80, 80, 80)); 
+        records.add(new GradeRecord("100000001", "CSC101", 80, 80, 80, 80));
         records.add(new GradeRecord("100000002", "CSC101", 50, 60, 70, 90));
 
         // 2. Run Processor
@@ -59,7 +59,7 @@ public class StudentGradeProcessorTest {
 
         // 3. Verify Results
         assertEquals(2, results.size(), "Should process 2 valid records");
-        
+
         // Verify Alice's Grade (80 across the board should result in 80)
         ProcessedResult aliceResult = results.stream()
                 .filter(r -> r.getStudentId().equals("100000001"))
@@ -137,3 +137,4 @@ public class StudentGradeProcessorTest {
         });
     }
 }
+
