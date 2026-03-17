@@ -7,7 +7,7 @@ A Java-based application designed to process student grades from CSV files, comp
 The `StudentGradeProcessor` automates the task of combining student identity information with their course grades. It handles data validation, calculates weighted final grades, deduplicates entries, and outputs the results sorted by Student ID.
 
 ### Key Features
-* **File Reading & Parsing:** Reads `names.csv` and `courses.csv` files using robust, error-checked file readers.
+* **File Reading & Parsing:** Reads `names.txt` and `courses.txt` files using robust, error-checked file readers.
 * **Data Validation:** Implements defensive programming to catch and report missing data, invalid formats, out-of-bounds grades (0-100), and duplicate records.
 * **Grade Calculation:** Computes a final grade where three tests account for 20% each (60% total) and a final exam accounts for 40%.
 * **Deduplication:** Automatically ignores duplicate grade submissions for the same student in the same course.
@@ -29,11 +29,11 @@ This project is structured around standard OOP pillars:
 
 ## Getting Started
 
-1. **Input Files:** Place your `names.csv` and `courses.csv` files in the appropriate directory (or update the file paths in `Main.java`).
+1. **Input Files:** Place your `names.txt` and `courses.txt` files in the appropriate directory (or update the file paths in `Main.java`).
     * **Names format:** `StudentID,Student Name` (e.g., `123456789,John Doe`)
     * **Courses format:** `StudentID,CourseCode,Test1,Test2,Test3,FinalExam` (e.g., `123456789,CS101,80,85,90,95`)
 2. **Run:** Execute the `Main.java` class to process the data.
-3. **Output:** A `results.csv` file will be generated containing the calculated final grades.
+3. **Output:** A `results.txt` file will be generated containing the calculated final grades.
 
 ## Project Structure
 
