@@ -1,0 +1,4 @@
+Student ID,Student Name,Course Code,Final grade (test 1,2,3-3x20%, final exam 40%)
+306851690,Bevan Morton,CP460,70.4
+306851690,Bevan Morton,CP164,0.0
+413787382,Markus Cote,CP164,75.8
