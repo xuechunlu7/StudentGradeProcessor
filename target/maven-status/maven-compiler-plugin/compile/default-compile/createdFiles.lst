@@ -1,6 +1,5 @@
 processor/DataProcessor.class
 Main.class
-processor/GradeCalculator.class
 model/GradeRecord.class
 model/Course.class
 reader/NameFileReader.class

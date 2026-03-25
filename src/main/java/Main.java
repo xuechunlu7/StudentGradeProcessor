@@ -20,9 +20,9 @@ public class Main {
                 "input"
             };
             
-            String nameFilePath = findFile(possiblePaths, "NameFile.txt");
-            String courseFilePath = findFile(possiblePaths, "CourseFile.txt");
-            String outputFilePath = "src/output/OutputFile.txt";
+            String nameFilePath = findFile(possiblePaths, "NameFile_test.txt");
+            String courseFilePath = findFile(possiblePaths, "CourseFile_test.txt");
+            String outputFilePath = "src/output/OutputFile_test.txt";
             
             // Create output directory if it doesn't exist
             new File("src/output").mkdirs();

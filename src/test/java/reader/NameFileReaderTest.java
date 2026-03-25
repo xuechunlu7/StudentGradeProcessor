@@ -139,4 +139,24 @@ class NameFileReaderTest {
 
         Files.deleteIfExists(tempFile);
     }
+    
+    @Test
+    void testParseLineDuplicateStudentId() throws IOException {
+        Path tempFile = Files.createTempFile("duplicate_id", ".txt");
+        // Two lines with the same ID but different names
+        Files.writeString(tempFile, "123456789,John Doe\n123456789,Jane Smith");
+
+        NameFileReader reader = null;
+        try {
+            reader = new NameFileReader(tempFile.toString());
+        } catch (DataValidationException e) {
+            fail("Exception thrown in constructor unexpectedly: " + e.getMessage());
+        }
+
+        NameFileReader finalReader = reader;
+        DataValidationException exception = assertThrows(DataValidationException.class, finalReader::readFile);
+        assertTrue(exception.getMessage().contains("duplicate student ID error"));
+        
+        Files.deleteIfExists(tempFile);
+    }
 }

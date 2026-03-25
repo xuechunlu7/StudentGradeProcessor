@@ -7,7 +7,8 @@ class StudentTest {
 
     @Test
     void testConstructorAndGetters() {
-        Student student = new Student("123456789", "John Doe");
+        // Test with inputs that have leading/trailing whitespace to ensure trim() works correctly
+        Student student = new Student("  123456789  ", "  John Doe  ");
         assertEquals("123456789", student.getStudentId());
         assertEquals("John Doe", student.getStudentName());
     }
@@ -20,7 +21,14 @@ class StudentTest {
 
     @Test
     void testEmptyStudentId() {
+        // Empty string
         assertThrows(IllegalArgumentException.class, () -> new Student("", "John Doe"));
+    }
+    
+    @Test
+    void testWhitespaceStudentId() {
+        // String with only spaces (tests the .trim().isEmpty() branch)
+        assertThrows(IllegalArgumentException.class, () -> new Student("   ", "John Doe"));
     }
 
     @Test
@@ -30,7 +38,14 @@ class StudentTest {
 
     @Test
     void testEmptyStudentName() {
+        // Empty string
         assertThrows(IllegalArgumentException.class, () -> new Student("123456789", ""));
+    }
+    
+    @Test
+    void testWhitespaceStudentName() {
+        // String with only spaces (tests the .trim().isEmpty() branch)
+        assertThrows(IllegalArgumentException.class, () -> new Student("123456789", "   "));
     }
 
     @Test

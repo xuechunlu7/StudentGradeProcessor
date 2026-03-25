@@ -14,14 +14,18 @@ public class Student {
         if (studentName == null || studentName.trim().isEmpty()) {
             throw new IllegalArgumentException("Student name cannot be empty");
         }
-        if (studentId.length() != 9) {
+        
+        // Trim BEFORE doing exact length/regex validations
+        String trimmedId = studentId.trim();
+        
+        if (trimmedId.length() != 9) {
             throw new IllegalArgumentException("Student ID must be 9 digits");
         }
-        if (!studentId.matches("\\d{9}")) {
+        if (!trimmedId.matches("\\d{9}")) {
             throw new IllegalArgumentException("Student ID must contain only digits");
         }
         
-        this.studentId = studentId.trim();
+        this.studentId = trimmedId;
         this.studentName = studentName.trim();
     }
     

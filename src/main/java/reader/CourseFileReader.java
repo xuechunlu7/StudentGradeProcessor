@@ -35,8 +35,17 @@ public class CourseFileReader extends FileReader<GradeRecord> {
             throw new DataValidationException("Line " + lineNumber + " format error: requires 6 columns (Student ID,Course Code,Test1,Test2,Test3,Final)");
         }
         
+        if (parts.length > 6) {
+            System.err.println("Warning: Line " + lineNumber + " has extra data. Expected 6 columns, found " + parts.length + ". Extra columns will be ignored.");
+        }
+        
         String studentId = parts[0].trim();
         String courseCode = parts[1].trim();
+        
+        // Defensive programming: validate course code format (2 letters, 3 digits)
+        if (!courseCode.matches("[a-zA-Z]{2}\\d{3}")) {
+            throw new DataValidationException("Line " + lineNumber + " course code format error: must be 2 letters followed by 3 digits (e.g., CS101)");
+        }
         
         try {
             double test1 = Double.parseDouble(parts[2].trim());

@@ -50,6 +50,46 @@ class CourseFileReaderTest {
         
         Files.deleteIfExists(tempFile);
     }
+    
+    @Test
+    void testParseLineExtraColumns() throws IOException, DataValidationException {
+        Path tempFile = Files.createTempFile("extra_cols", ".txt");
+        // Line has 7 columns
+        Files.writeString(tempFile, "123456789,CS101,80,85,90,95,100");
+
+        CourseFileReader reader = new CourseFileReader(tempFile.toString());
+        List<GradeRecord> records = reader.readFile();
+
+        assertEquals(1, records.size());
+        GradeRecord record = records.get(0);
+        assertEquals("123456789", record.getStudentId());
+        assertEquals("CS101", record.getCourseCode());
+        assertEquals(80, record.getTest1());
+        assertEquals(85, record.getTest2());
+        assertEquals(90, record.getTest3());
+        assertEquals(95, record.getFinalExam());
+        
+        Files.deleteIfExists(tempFile);
+    }
+    
+    @Test
+    void testParseLineInvalidCourseCodeFormat() throws IOException {
+        Path tempFile = Files.createTempFile("invalid_course", ".txt");
+        Files.writeString(tempFile, "123456789,C101,80,85,90,95"); // Only 1 letter
+
+        CourseFileReader reader = null;
+        try {
+            reader = new CourseFileReader(tempFile.toString());
+        } catch (DataValidationException e) {
+            fail("Exception thrown in constructor unexpectedly: " + e.getMessage());
+        }
+
+        CourseFileReader finalReader = reader;
+        DataValidationException exception = assertThrows(DataValidationException.class, finalReader::readFile);
+        assertTrue(exception.getMessage().contains("course code format error"));
+        
+        Files.deleteIfExists(tempFile);
+    }
 
     @Test
     void testParseLineInvalidNumber() throws IOException {
